@@ -4,7 +4,7 @@ ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 # Configure a database vendor
 WORKDIR /opt/keycloak
-RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:jenkinsuat.ravivarman.xyz/" -keystore conf/server.keystore
+RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:jenkinsuat.ravivarman.xyz" -keystore conf/server.keystore
 # Second stage
 FROM quay.io/keycloak/keycloak:latest
 # Copy files from the builder stage
