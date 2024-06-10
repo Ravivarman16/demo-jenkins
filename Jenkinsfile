@@ -13,7 +13,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('your_image_name', "--build-arg USERNAME=${USERNAME} --build-arg USERPWD=${USERPWD} --build-arg USER_DB=${USER_DB} --build-arg USERDBNAME=${USERDBNAME} --build-arg USERDB_PWD=${USERDB_PWD} .")
+                    docker.build('key', "--build-arg USERNAME=${USERNAME} --build-arg USERPWD=${USERPWD} --build-arg USER_DB=${USER_DB} --build-arg USERDBNAME=${USERDBNAME} --build-arg USERDB_PWD=${USERDB_PWD} .")
                 }
             }
         }
