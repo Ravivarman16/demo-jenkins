@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        DOCKER_BUILDKIT = "1"
         KEYCLOAK_ADMIN = "${KEYCLOAK_ADMIN}"
         KEYCLOAK_ADMIN_PASSWORD = "${KEYCLOAK_ADMIN_PASSWORD}"
         KC_DB_USERNAME = "${KC_DB_USERNAME}"
