@@ -11,7 +11,7 @@ pipeline {
                         string(credentialsId: 'db-user', variable: 'USERDBNAME'),
                         string(credentialsId: 'db-pass', variable: 'USERDB_PWD')
                     ]) {
-                        docker.build('your_image_name', """
+                        docker.build('key', """
                             --build-arg USERNAME=${env.USERNAME} \
                             --build-arg USERPWD=${env.USERPWD} \
                             --build-arg USER_DB=${env.USER_DB} \
