@@ -19,7 +19,7 @@ pipeline {
                         --build-arg KC_DB_USERNAME=${env.KC_DB_USERNAME} \
                         --build-arg KC_DB_PASSWORD=${env.KC_DB_PASSWORD} \
                         .
-                    """)
+                    """) .
                 }
             }
         }
