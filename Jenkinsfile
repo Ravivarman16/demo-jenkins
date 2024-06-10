@@ -24,7 +24,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh "docker run -d -p 8443:8443 my-keycloak"
+                    sh "docker run -d -it -p 8081:8080 -p 8443:8443 my-keycloak start-dev"
                 }
             }
         }
