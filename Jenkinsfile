@@ -17,7 +17,7 @@ pipeline {
                     def kcDbPassword = KC_DB_CREDENTIALS_PSW
                     
                     // Building Docker image with build arguments for credentials
-                    sh "docker build -t demo \
+                    sh "docker build -t key \
                          --build-arg KEYCLOAK_ADMIN=${keycloakAdminUsername} \
                          --build-arg KEYCLOAK_ADMIN_PASSWORD=${keycloakAdminPassword} \
                          --build-arg KC_DB_USERNAME=${kcDbUsername} \
