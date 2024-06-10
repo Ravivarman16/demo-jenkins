@@ -12,7 +12,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t my-keycloak \
+                    sh "docker build -t demo \
                          --build-arg KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN} \
                          --build-arg KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD} \
                          --build-arg KC_DB_USERNAME=${KC_DB_USERNAME} \
@@ -24,7 +24,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh "docker run -d -it -p 8081:8080 -p 8443:8443 my-keycloak start-dev"
+                    sh "docker run -d -it --name key -p 8080:8080 -p 8443:8443 demo start-dev"
                 }
             }
         }
