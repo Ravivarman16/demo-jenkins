@@ -13,13 +13,12 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("my-keycloak", """
+                    docker.buildx("my-keycloak", """
                         --build-arg KEYCLOAK_ADMIN=${env.KEYCLOAK_ADMIN} \
                         --build-arg KEYCLOAK_ADMIN_PASSWORD=${env.KEYCLOAK_ADMIN_PASSWORD} \
                         --build-arg KC_DB_USERNAME=${env.KC_DB_USERNAME} \
-                        --build-arg KC_DB_PASSWORD=${env.KC_DB_PASSWORD} \
-                        .
-                    """) .
+                        --build-arg KC_DB_PASSWORD=${env.KC_DB_PASSWORD} .
+                    """)
                 }
             }
         }
