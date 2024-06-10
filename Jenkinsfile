@@ -1,19 +1,24 @@
 pipeline {
     agent any
 
-    environment {
-        USERNAME = credentials('admin-username')
-        USERPWD = credentials('keycloakadmin-pass')
-        USER_DB = credentials('db-url')
-        USERDBNAME = credentials('db-user')
-        USERDB_PWD = credentials('db-pass')
-    }
-
     stages {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('your_image_name', "--build-arg USERNAME=${USERNAME} --build-arg USERPWD=${USERPWD} --build-arg USER_DB=${USER_DB} --build-arg USERDBNAME=${USERDBNAME} --build-arg USERDB_PWD=${USERDB_PWD} .")
+                    withCredentials([
+                        usernamePassword(credentialsId: 'admin-username', usernameVariable: 'USERNAME', passwordVariable: 'USERPWD'),
+                        string(credentialsId: 'db-url', variable: 'USER_DB'),
+                        string(credentialsId: 'db-user', variable: 'USERDBNAME'),
+                        string(credentialsId: 'db-pass', variable: 'USERDB_PWD')
+                    ]) {
+                        docker.build('your_image_name', """
+                            --build-arg USERNAME=${env.USERNAME} \
+                            --build-arg USERPWD=${env.USERPWD} \
+                            --build-arg USER_DB=${env.USER_DB} \
+                            --build-arg USERDBNAME=${env.USERDBNAME} \
+                            --build-arg USERDB_PWD=${env.USERDB_PWD} .
+                        """)
+                    }
                 }
             }
         }
