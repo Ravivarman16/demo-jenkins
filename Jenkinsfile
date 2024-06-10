@@ -11,10 +11,10 @@ pipeline {
             steps {
                 script {
                     // Extracting username and password from credentials
-                    def keycloakAdminUsername = credentials('keycloak-admin-credentials').username
-                    def keycloakAdminPassword = credentials('keycloak-admin-credentials').password
-                    def kcDbUsername = credentials('kc-db-credentials').username
-                    def kcDbPassword = credentials('kc-db-credentials').password
+                    def keycloakAdminUsername = KEYCLOAK_ADMIN_CREDENTIALS_USR
+                    def keycloakAdminPassword = KEYCLOAK_ADMIN_CREDENTIALS_PSW
+                    def kcDbUsername = KC_DB_CREDENTIALS_USR
+                    def kcDbPassword = KC_DB_CREDENTIALS_PSW
                     
                     // Building Docker image with build arguments for credentials
                     sh "docker build -t demo \
@@ -29,8 +29,6 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh "docker stop key"
-                    sh "docker rm key"
                     sh "docker run -d -it --name key -p 8080:8080 -p 8443:8443 demo start-dev"
                 }
             }
