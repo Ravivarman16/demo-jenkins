@@ -11,6 +11,7 @@ FROM quay.io/keycloak/keycloak:latest
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 # Set environment variables
 ENV KC_HOSTNAME_DEBUG=false
+ENV KC_HOSTNAME=jenkinskey.ravivarman.xyz
 ENV KC_HTTPS_PORT=8443
 ENV DB_VENDOR=postgres
 ENV KEYCLOAK_ADMIN=$USERNAME
