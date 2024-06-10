@@ -12,14 +12,14 @@ pipeline {
                         string(credentialsId: 'USERDBNAME', variable: 'USERDBNAME'),
                         string(credentialsId: 'USERDB_PWD', variable: 'USERDB_PWD')
                     ]) {
-                        def buildArgs = """
-                            --build-arg USERNAME=${USERNAME} \
-                            --build-arg USERPWD=${USERPWD} \
-                            --build-arg USER_DB=${USER_DB} \
-                            --build-arg USERDBNAME=${USERDBNAME} \
-                            --build-arg USERDB_PWD=${USERDB_PWD}
-                        """
-                        docker.build('your_image_name', "${buildArgs} .")
+                        def buildArgs = [
+                            "--build-arg USERNAME=${USERNAME}",
+                            "--build-arg USERPWD=${USERPWD}",
+                            "--build-arg USER_DB=${USER_DB}",
+                            "--build-arg USERDBNAME=${USERDBNAME}",
+                            "--build-arg USERDB_PWD=${USERDB_PWD}"
+                        ]
+                        docker.build('your_image_name', buildArgs.join(' ') + ' .')
                     }
                 }
             }
