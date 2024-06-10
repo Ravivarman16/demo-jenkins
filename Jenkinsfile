@@ -29,7 +29,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh "docker run -d -it --name key -p 8080:8080 -p 8443:8443 demo start-dev"
+                    sh "docker run -d -it --name key -p 8080:8080 -p 8443:8443 key start-dev"
                 }
             }
         }
