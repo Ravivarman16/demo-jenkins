@@ -17,7 +17,7 @@ pipeline {
                     def kcDbPassword = KC_DB_CREDENTIALS_PSW
                     
                     // Building Docker image with build arguments for credentials
-                    sh "docker build -t key \
+                    sh "docker build -t uat \
                          --build-arg KEYCLOAK_ADMIN=${keycloakAdminUsername} \
                          --build-arg KEYCLOAK_ADMIN_PASSWORD=${keycloakAdminPassword} \
                          --build-arg KC_DB_USERNAME=${kcDbUsername} \
@@ -29,7 +29,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh "docker run -d -it --name key -p 8080:8080 -p 8443:8443 key start-dev"
+                    sh "docker run -d -it --name key -p 8080:8080 -p 8443:8443 uat start-dev"
                 }
             }
         }
