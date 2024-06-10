@@ -24,12 +24,6 @@ FROM quay.io/keycloak/keycloak:latest
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 # Set additional environmental variables
-ARG USERNAME
-ARG USERPWD
-ARG USER_DB
-ARG USERDBNAME
-ARG USERDB_PWD
-
 ENV KC_HOSTNAME_DEBUG=false
 ENV KC_HOSTNAME=jenkinskey.ravivarman.xyz
 ENV KC_HTTPS_PORT=8443
