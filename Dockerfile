@@ -1,5 +1,5 @@
 # Multi-stage build
-FROM quay.io/keycloak/keycloak:latest as builder
+FROM quay.io/keycloak/keycloak:25.0.0 as builder
 
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=true
@@ -10,7 +10,7 @@ WORKDIR /opt/keycloak
 RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:uat.ravivarman.xyz" -keystore conf/server.keystore
 
 # Second stage
-FROM quay.io/keycloak/keycloak:latest
+FROM quay.io/keycloak/keycloak:25.0.0
 
 # Copy files from the builder stage
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
@@ -33,6 +33,7 @@ ENV KC_DB_USERNAME=${KC_DB_USERNAME}
 ENV KC_DB_PASSWORD=${KC_DB_PASSWORD}
 ENV KC_HTTP_ENABLED=false
 ENV KC_HOSTNAME_URL=https://uat.ravivarman.xyz/
+ENV KC_HOSTNAME=uat.ravivarman.xyz
 ENV -Dkeycloak.profile.feature.admin_fine_grained_authz.upload_scripts=enabled
 # Entry point command
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
