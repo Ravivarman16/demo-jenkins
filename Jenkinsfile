@@ -12,10 +12,11 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("my-keycloak", "--build-arg KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN} \
-                                                   --build-arg KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD} \
-                                                   --build-arg KC_DB_USERNAME=${KC_DB_USERNAME} \
-                                                   --build-arg KC_DB_PASSWORD=${KC_DB_PASSWORD} .")
+                    sh "docker build -t my-keycloak \
+                         --build-arg KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN} \
+                         --build-arg KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD} \
+                         --build-arg KC_DB_USERNAME=${KC_DB_USERNAME} \
+                         --build-arg KC_DB_PASSWORD=${KC_DB_PASSWORD} ."
                 }
             }
         }
@@ -23,7 +24,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.image("my-keycloak").run("-d -p 8443:8443")
+                    sh "docker run -d -p 8443:8443 my-keycloak"
                 }
             }
         }
