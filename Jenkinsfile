@@ -6,17 +6,17 @@ pipeline {
             steps {
                 script {
                     withCredentials([
-                        usernamePassword(credentialsId: 'admin-username', usernameVariable: 'USERNAME', passwordVariable: 'USERPWD'),
-                        string(credentialsId: 'db-url', variable: 'USER_DB'), // Make sure this is a string credential in Jenkins
-                        string(credentialsId: 'db-user', variable: 'USERDBNAME'), // Make sure this is a string credential in Jenkins
-                        string(credentialsId: 'db-pass', variable: 'USERDB_PWD') // Make sure this is a string credential in Jenkins
+                        usernamePassword(credentialsId: 'USERNAME', usernameVariable: 'USERNAME', passwordVariable: 'USERPWD'),
+                        string(credentialsId: 'USER_DB', variable: 'USER_DB'),
+                        string(credentialsId: 'USERDBNAME', variable: 'USERDBNAME'),
+                        string(credentialsId: 'USERDB_PWD', variable: 'USERDB_PWD')
                     ]) {
                         docker.build('your_image_name', """
-                            --build-arg USERNAME=${env.USERNAME} \
-                            --build-arg USERPWD=${env.USERPWD} \
-                            --build-arg USER_DB=${env.USER_DB} \
-                            --build-arg USERDBNAME=${env.USERDBNAME} \
-                            --build-arg USERDB_PWD=${env.USERDB_PWD} .
+                            --build-arg USERNAME=${USERNAME} \
+                            --build-arg USERPWD=${USERPWD} \
+                            --build-arg USER_DB=${USER_DB} \
+                            --build-arg USERDBNAME=${USERDBNAME} \
+                            --build-arg USERDB_PWD=${USERDB_PWD} .
                         """)
                     }
                 }
