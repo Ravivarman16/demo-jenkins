@@ -25,7 +25,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.image("my-keycloak").run("-d -it -p 8443:8443 -p 8080:8080")
+                    docker.image("my-keycloak").run("-d -p 8443:8443")
                 }
             }
         }
