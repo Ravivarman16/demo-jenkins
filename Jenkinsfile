@@ -10,6 +10,14 @@ pipeline {
                     def user_db = env.USER_DB
                     def userdbname = env.USERDBNAME // Using USERDBNAME from global properties
                     def userdb_pwd = env.USERDB_PWD
+                    
+                    // Log the retrieved environmental variables (for debugging purposes)
+                    echo "USERNAME: ${username}"
+                    echo "USERPWD: ${userpwd}"
+                    echo "USER_DB: ${user_db}"
+                    echo "USERDBNAME: ${userdbname}"
+                    echo "USERDB_PWD: ${userdb_pwd}"
+                    
                     // Build the Docker image with build arguments
                     docker.build('your_image_name', "--build-arg USERNAME=${username} --build-arg USERPWD=${userpwd} --build-arg USER_DB=${user_db} --build-arg USERDBNAME=${userdbname} --build-arg USERDB_PWD=${userdb_pwd} .")
                 }
