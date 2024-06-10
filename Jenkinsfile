@@ -19,7 +19,7 @@ pipeline {
                             --build-arg USERDBNAME=${USERDBNAME} \
                             --build-arg USERDB_PWD=${USERDB_PWD} \
                             .
-                        """)
+                        """) .
                     }
                 }
             }
