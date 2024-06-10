@@ -17,7 +17,8 @@ pipeline {
                         --build-arg KEYCLOAK_ADMIN=${env.KEYCLOAK_ADMIN} \
                         --build-arg KEYCLOAK_ADMIN_PASSWORD=${env.KEYCLOAK_ADMIN_PASSWORD} \
                         --build-arg KC_DB_USERNAME=${env.KC_DB_USERNAME} \
-                        --build-arg KC_DB_PASSWORD=${env.KC_DB_PASSWORD} .
+                        --build-arg KC_DB_PASSWORD=${env.KC_DB_PASSWORD} \
+                        .
                     """)
                 }
             }
