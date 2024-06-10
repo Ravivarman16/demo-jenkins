@@ -6,7 +6,8 @@ pipeline {
             steps {
                 script {
                     withCredentials([
-                        usernamePassword(credentialsId: 'USERNAME', usernameVariable: 'USERNAME', passwordVariable: 'USERPWD'),
+                        string(credentialsId: 'USERNAME', variable: 'USERNAME'),
+                        string(credentialsId: 'USERPWD', variable: 'USERPWD'),
                         string(credentialsId: 'USER_DB', variable: 'USER_DB'),
                         string(credentialsId: 'USERDBNAME', variable: 'USERDBNAME'),
                         string(credentialsId: 'USERDB_PWD', variable: 'USERDB_PWD')
